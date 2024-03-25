@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Members</h2>
+    {% for member_profile in members %}
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ member_profile.full_name }}</h5>
+                    <p class="card-text">Email: {{ member_profile.email }}</p>
+                    <p class="card-text">Phone: {{ member_profile.phone }}</p>
+                    <p class="card-text">Date of Birth: {{ member_profile.date_of_birth|date:"Y-m-d" }}</p>
+                    <p class="card-text">Join Date: {{ member_profile.join_date|date:"Y-m-d" }}</p>
+                    <p class="card-text">Membership Type: {{ member_profile.get_membership_type_display }}</p>
+                    <p class="card-text">Active: {{ member_profile.active|yesno:"Yes,No" }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="{% url 'edit_member' member_profile.id %}" class="btn btn-primary mr-2">Edit</a>
+            <a href="{% url 'delete_member' member_profile.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info" role="alert">
+        No members found.
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Water Intake Calculator</h2>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="form-row">
+            <!-- Wrap each form field in form-group and assign Bootstrap classes -->
+            {% for field in form %}
+            <div class="form-group col-md-6">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <!-- Check field type to apply specific input or select -->
+                {% if field.field.widget.input_type == 'select' %}
+                <select class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}">
+                    {% for option_key, option_value in field.field.choices %}
+                    <option value="{{ option_key }}" {% if field.value == option_key %} selected {% endif %}>{{ option_value }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default:'' }}">
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+
+    {% if recommended_water_intake %}
+    <div class="alert alert-info mt-4" role="alert">
+        <h4 class="alert-heading">Recommended Water Intake</h4>
+        <p>{{ recommended_water_intake }} liters</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
