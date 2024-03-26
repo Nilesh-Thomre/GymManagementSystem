@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Add Member Profile</h2>
-    <form method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="mb-4">Add Member Profile</h2>
+        <form method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
+
 {% endblock %}

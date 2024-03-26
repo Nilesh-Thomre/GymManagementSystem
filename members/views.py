@@ -4,6 +4,7 @@ from .forms import MemberForm
 from .forms import MemberProfileForm
 from .models import MemberProfile
 from .forms import WaterIntakeForm
+from .forms import BodyFatForm
 import requests
 def member_list(request):
     # If you want to display MemberProfile instances
@@ -67,3 +68,30 @@ def delete_member(request, pk):
         member.delete()
         return redirect('member_list')
     return render(request, 'members/confirm_delete.html', {'member': member})
+    
+def homepage(request):
+    return render(request, 'members/homepage.html')
+    
+def calculate_body_fat(request):
+    form = BodyFatForm(request.POST or None)
+    context = {'form': form}
+    
+    if request.method == 'POST' and form.is_valid():
+        # Extract data from form
+        weight = form.cleaned_data['weight']
+        height = form.cleaned_data['height']
+        age = form.cleaned_data['age']
+        gender = form.cleaned_data['gender']
+        
+        # Prepare API request
+        api_url = 'https://fu8odvcjmd.execute-api.eu-west-1.amazonaws.com/getBodyFatCal'
+        params = {'weight': weight, 'height': height, 'age': age, 'gender': gender}
+        response = requests.get(api_url, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            context['body_fat_percentage'] = data['BodyFatPercentage']
+        else:
+            context['error_message'] = 'There was an error processing your request.'
+    
+    return render(request, 'members/calculate_body_fat.html', context)

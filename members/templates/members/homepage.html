@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .gym-background {
+        background: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80') no-repeat center center;
+        background-size: cover;
+        color: white; /* Ensures text is readable on potentially dark backgrounds */
+    }
+    .quote {
+        font-style: italic;
+        margin-top: 20px;
+        border-left: 4px solid #ffffff;
+        padding-left: 15px;
+    }
+</style>
+
+<div class="container-fluid p-5 gym-background">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 font-weight-bold">Embrace a Healthier You</h1>
+            <p class="lead mb-4">Discover the transformative power of being fit and active. Here's how a fit lifestyle can benefit you:</p>
+            <ul class="list-unstyled">
+                <li>🌟 Enhanced mental and emotional well-being</li>
+                <li>🌟 Boosted energy levels throughout the day</li>
+                <li>🌟 Lower risk of chronic diseases</li>
+                <li>🌟 Improved quality of sleep</li>
+                <li>🌟 Stronger muscles and bones</li>
+            </ul>
+            <p class="quote">"Strength does not come from the physical capacity. It comes from an indomitable will." - Mahatma Gandhi</p>
+            <p class="quote">"The body achieves what the mind believes."</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

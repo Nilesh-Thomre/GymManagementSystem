@@ -36,3 +36,8 @@ class WaterIntakeForm(forms.Form):
     weight = forms.ChoiceField(choices=WEIGHT_CHOICES, label="Weight (kg)")
     activity_level = forms.ChoiceField(choices=ACTIVITY_LEVEL_CHOICES, label="Activity Level")
     climate = forms.ChoiceField(choices=CLIMATE_CHOICES, label="Climate")
+class BodyFatForm(forms.Form):
+    weight = forms.FloatField(label='Weight (kg)', min_value=0.1)
+    height = forms.FloatField(label='Height (meters)', min_value=0.1)
+    age = forms.IntegerField(label='Age', min_value=1)
+    gender = forms.ChoiceField(label='Gender', choices=((0, 'Female'), (1, 'Male')))

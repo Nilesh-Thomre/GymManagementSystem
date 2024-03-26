@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Calculate Body Fat</div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'calculate_body_fat' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="form-row">
+                            {% for field in form %}
+                            <div class="form-group col-md-12">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% if field.field.widget.input_type == 'select' %}
+                                <select class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}">
+                                    {% for option_key, option_value in field.field.choices %}
+                                    <option value="{{ option_key }}" {% if field.value == option_key %} selected {% endif %}>
+                                        {{ option_value }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                {% else %}
+                                <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default:'' }}" {% if field.field.widget.attrs.placeholder %}placeholder="{{ field.field.widget.attrs.placeholder }}" {% endif %}>
+                                {% endif %}
+                                {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                <div class="invalid-feedback" style="display: block;">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            {% if body_fat_percentage %}
+            <div class="alert alert-success" role="alert">
+                Your Body Fat Percentage is: {{ body_fat_percentage }}%
+            </div>
+            {% endif %}
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

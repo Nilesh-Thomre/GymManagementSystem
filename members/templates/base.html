@@ -6,39 +6,113 @@
     <title>Gym Management System</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {% load static %}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        
+        body {
+            padding-top: 56px; /* Adjust for navbar */
+        }
+.card {
+    background-color: #333; /* Dark background for contrast */
+    color: white; /* Ensures text is white */
+}
+
+        .carousel, .carousel-item, .carousel-item img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        nav {
+            z-index: 30; /* Ensure nav is above everything */
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gym Management</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'member_list' %}">Members <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add_member_profile' %}">Add Member Profile</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="{% url 'water_intake' %}">Water Intake Calculator</a>
-                </li>
-                <!-- Add more navigation links here -->
-            </ul>
-        </div>
-    </nav>
 
-    <div class="container mt-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{% url 'homepage' %}">Gym Management</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'member_list' %}">Members<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_member_profile' %}">Add Member Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'water_intake' %}">Water Intake Calculator</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'calculate_body_fat' %}">Calculate Body Fat</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'gym-1.jpg' %}" alt="Gym 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'gym-2.jpg' %}" alt="Gym 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'gym-3.jpg' %}" alt="Gym 3">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'gym-4.jpg' %}" alt="Gym 4">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'gym-5.jpg' %}" alt="Gym 5">
+        </div>
+    </div>
+</div>
+
+<div class="content-container">
+    <div class="form-container">
         {% block content %}
-        <!-- Content goes here -->
+        <!-- Your form content will be injected here -->
         {% endblock %}
     </div>
+</div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
