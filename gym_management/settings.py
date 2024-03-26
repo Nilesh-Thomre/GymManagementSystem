@@ -23,6 +23,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-p@6+*&xcyezpi3+&fj!(a_3qz70!&gog4ei1g@u0tk$78k4nj='
+NEWS_API_KEY = 'd3bd37d333cc47ddbc619d767565f01d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

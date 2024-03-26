@@ -6,6 +6,7 @@ from .models import MemberProfile
 from .forms import WaterIntakeForm
 from .forms import BodyFatForm
 import requests
+from django.conf import settings
 def member_list(request):
     # If you want to display MemberProfile instances
     member_profiles = MemberProfile.objects.all()
@@ -95,3 +96,14 @@ def calculate_body_fat(request):
             context['error_message'] = 'There was an error processing your request.'
     
     return render(request, 'members/calculate_body_fat.html', context)
+
+def get_fitness_news(request):
+    url = 'https://newsapi.org/v2/everything'
+    params = {
+        'q': 'fitness',
+        'apiKey': settings.NEWS_API_KEY,
+    }
+    response = requests.get(url, params=params)
+    articles = response.json().get('articles', [])
+
+    return render(request, 'members/fitness_news.html', {'articles': articles})    

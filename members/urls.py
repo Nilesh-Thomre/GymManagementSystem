@@ -9,4 +9,5 @@ urlpatterns = [
     path('member/delete/<int:pk>/', views.delete_member, name='delete_member'),
     path('homepage/', views.homepage, name='homepage'),
     path('calculate-body-fat/', views.calculate_body_fat, name='calculate_body_fat'),
+    path('fitness-news/', views.get_fitness_news, name='fitness_news'),
 ]
