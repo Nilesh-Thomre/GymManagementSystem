@@ -10,4 +10,5 @@ urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
     path('calculate-body-fat/', views.calculate_body_fat, name='calculate_body_fat'),
     path('fitness-news/', views.get_fitness_news, name='fitness_news'),
+    path('calorie_intake', views.calorie_intake_view, name='calorie_intake'),
 ]

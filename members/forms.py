@@ -41,3 +41,8 @@ class BodyFatForm(forms.Form):
     height = forms.FloatField(label='Height (meters)', min_value=0.1)
     age = forms.IntegerField(label='Age', min_value=1)
     gender = forms.ChoiceField(label='Gender', choices=((0, 'Female'), (1, 'Male')))
+
+
+class CalorieIntakeForm(forms.Form):
+    height = forms.FloatField(label='Height (cm)', min_value=100, max_value=250)
+    weight = forms.FloatField(label='Weight (kg)', min_value=30, max_value=200)    

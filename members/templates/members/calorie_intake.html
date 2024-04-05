@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Calorie Intake Calculator</h2>
+    <form method="get" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="form-row">
+            {% for field in form %}
+            <div class="form-group col-md-6">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default_if_none:'' }}">
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+
+    {% if calorie_intake %}
+    <div class="alert alert-info mt-4" role="alert">
+        <h4 class="alert-heading">Recommended Calorie Intake</h4>
+        <p>{{ calorie_intake }} calories per day</p>
+    </div>
+    {% endif %}
+    {% if error_message %}
+    <div class="alert alert-danger mt-4" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

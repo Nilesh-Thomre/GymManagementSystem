@@ -7,6 +7,7 @@ from .forms import WaterIntakeForm
 from .forms import BodyFatForm
 import requests
 from django.conf import settings
+from .forms import CalorieIntakeForm
 def member_list(request):
     # If you want to display MemberProfile instances
     member_profiles = MemberProfile.objects.all()
@@ -107,3 +108,28 @@ def get_fitness_news(request):
     articles = response.json().get('articles', [])
 
     return render(request, 'members/fitness_news.html', {'articles': articles})    
+
+
+
+
+def calorie_intake_view(request):
+    form = CalorieIntakeForm(request.GET or None)
+    context = {'form': form}
+    
+    if request.method == 'GET' and form.is_valid():
+        # Extract data from form
+        height = form.cleaned_data['height']
+        weight = form.cleaned_data['weight']
+        
+        # Prepare API request
+        api_url = 'http://calorieapi-env.eba-udbdxf3g.us-east-1.elasticbeanstalk.com/api/calorie_intake'
+        params = {'height': height, 'weight': weight}
+        response = requests.get(api_url, params=params)
+        
+        if response.status_code == 200:
+            data = response.json()
+            context['calorie_intake'] = data.get('calorie_intake')
+        else:
+            context['error_message'] = 'There was an error processing your request.'
+    
+    return render(request, 'members/calorie_intake.html', context)
