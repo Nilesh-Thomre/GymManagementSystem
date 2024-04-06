@@ -1,7 +1,10 @@
 from django import forms
 from .models import Member
 from .models import MemberProfile
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
@@ -46,3 +49,10 @@ class BodyFatForm(forms.Form):
 class CalorieIntakeForm(forms.Form):
     height = forms.FloatField(label='Height (cm)', min_value=100, max_value=250)
     weight = forms.FloatField(label='Weight (kg)', min_value=30, max_value=200)    
+    
+User = get_user_model()
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = UserCreationForm.Meta.fields + ('email',)

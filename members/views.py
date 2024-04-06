@@ -8,10 +8,22 @@ from .forms import BodyFatForm
 import requests
 from django.conf import settings
 from .forms import CalorieIntakeForm
+from django.urls import reverse_lazy
+from django.views import generic
+from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+
+class SignUpView(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')  # Redirect to login URL after successful signup
+    template_name = 'members/signup.html'
+
+@login_required(login_url='login')
 def member_list(request):
     # If you want to display MemberProfile instances
     member_profiles = MemberProfile.objects.all()
     return render(request, 'members/member_list.html', {'members': member_profiles})
+@login_required(login_url='login')
 def add_member_profile(request):
     if request.method == 'POST':
         form = MemberProfileForm(request.POST)
@@ -22,6 +34,7 @@ def add_member_profile(request):
         form = MemberProfileForm()
     
     return render(request, 'members/add_member_profile.html', {'form': form})
+@login_required(login_url='login')
 def water_intake_calculator(request):
     form = WaterIntakeForm(request.POST or None)
     recommended_water_intake = None
@@ -52,7 +65,8 @@ def water_intake_calculator(request):
         'form': form,
         'recommended_water_intake': recommended_water_intake
     })
-    
+@login_required(login_url='login')
+
 def edit_member(request, pk):
     member = get_object_or_404(MemberProfile, pk=pk)
     if request.method == 'POST':
@@ -63,17 +77,19 @@ def edit_member(request, pk):
     else:
         form = MemberProfileForm(instance=member)
     return render(request, 'members/edit_member_profile.html', {'form': form})
-
+@login_required(login_url='login')
 def delete_member(request, pk):
     member = get_object_or_404(MemberProfile, pk=pk)
     if request.method == 'POST':
         member.delete()
         return redirect('member_list')
     return render(request, 'members/confirm_delete.html', {'member': member})
-    
+@login_required(login_url='login')
+   
 def homepage(request):
     return render(request, 'members/homepage.html')
-    
+@login_required(login_url='login')
+   
 def calculate_body_fat(request):
     form = BodyFatForm(request.POST or None)
     context = {'form': form}
@@ -97,6 +113,7 @@ def calculate_body_fat(request):
             context['error_message'] = 'There was an error processing your request.'
     
     return render(request, 'members/calculate_body_fat.html', context)
+@login_required(login_url='login')
 
 def get_fitness_news(request):
     url = 'https://newsapi.org/v2/everything'
@@ -111,6 +128,7 @@ def get_fitness_news(request):
 
 
 
+@login_required(login_url='login')
 
 def calorie_intake_view(request):
     form = CalorieIntakeForm(request.GET or None)
@@ -133,3 +151,4 @@ def calorie_intake_view(request):
             context['error_message'] = 'There was an error processing your request.'
     
     return render(request, 'members/calorie_intake.html', context)
+    

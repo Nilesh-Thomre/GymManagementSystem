@@ -1,6 +1,5 @@
 from django.db import models
-
-# Define membership choices at the module level to avoid duplication
+from django.contrib.auth.models import AbstractUser
 MEMBERSHIP_CHOICES = (
     ('standard', 'Standard'),
     ('premium', 'Premium'),
@@ -33,3 +32,7 @@ class MemberProfile(models.Model):
     def full_name(self):
         """Returns the person's full name."""
         return f"{self.first_name} {self.last_name}"
+class CustomUser(AbstractUser):
+    # Your additional fields here
+    age = models.PositiveIntegerField(null=True, blank=True)
+    pass
