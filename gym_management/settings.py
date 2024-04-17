@@ -31,7 +31,7 @@ NEWS_API_KEY = 'd3bd37d333cc47ddbc619d767565f01d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-CSRF_TRUSTED_ORIGINS = ['https://fec69a742078403a8593029c1ad3b209.vfs.cloud9.eu-west-1.amazonaws.com','https://gymmanagementbynileshthomre.us-east-1.elasticbeanstalk.com']
+CSRF_TRUSTED_ORIGINS = ['https://fec69a742078403a8593029c1ad3b209.vfs.cloud9.eu-west-1.amazonaws.com']
 
 ALLOWED_HOSTS = ['*']
 
