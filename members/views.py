@@ -29,7 +29,7 @@ def add_member_profile(request):
         form = MemberProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('member_list')  # Redirect to a URL where you list members or show success
+            return redirect('member_list')  
     else:
         form = MemberProfileForm()
     

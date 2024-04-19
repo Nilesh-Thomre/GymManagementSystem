@@ -14,29 +14,24 @@ from pathlib import Path
 import os
 AUTH_USER_MODEL = 'members.CustomUser'
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'homepage'  # Or where you want users to go after logging in
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+LOGIN_REDIRECT_URL = 'homepage' 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-p@6+*&xcyezpi3+&fj!(a_3qz70!&gog4ei1g@u0tk$78k4nj='
 NEWS_API_KEY = 'd3bd37d333cc47ddbc619d767565f01d'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://fec69a742078403a8593029c1ad3b209.vfs.cloud9.eu-west-1.amazonaws.com']
 
 ALLOWED_HOSTS = ['*']
 
 
-# Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -80,8 +75,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'gym_management.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -91,8 +85,7 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,8 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
+
 
 LANGUAGE_CODE = 'en-us'
 
@@ -122,12 +114,10 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

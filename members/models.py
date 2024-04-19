@@ -33,6 +33,6 @@ class MemberProfile(models.Model):
         """Returns the person's full name."""
         return f"{self.first_name} {self.last_name}"
 class CustomUser(AbstractUser):
-    # Your additional fields here
+    
     age = models.PositiveIntegerField(null=True, blank=True)
     pass
